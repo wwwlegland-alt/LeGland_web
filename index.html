@@ -4,10 +4,29 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LeGland | Joyas de Acero Inoxidable</title>
+  <meta name="description"
+    content="LeGland - Joyas de acero inoxidable. Collares, pendientes, pulseras y anillos con diseño exclusivo.">
 
-  <!-- Google Fonts: Playfair Display & Lora -->
-  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600&display=swap" rel="stylesheet">
+  <!-- OPEN GRAPH / META TAGS PARA REDES SOCIALES -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.legland.es/">
+  <meta property="og:title" content="LeGland | Joyas de Acero Inoxidable - Diseño Exclusivo">
+  <meta property="og:description"
+    content="Descubre nuestra colección de joyas de acero inoxidable. Collares, pendientes, pulseras y anillos. Envíos a toda España.">
+  <meta property="og:image" content="https://www.legland.es/images/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="LeGland - Joyas de acero inoxidable">
+  <meta property="og:locale" content="es_ES">
+  <meta property="og:site_name" content="LeGland">
+
+  <title>LeGland | Joyas de Acero Inoxidable - Diseño Exclusivo</title>
+
+
+  <link rel="icon" href="images/logo/bellota.png" type="image/png">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
     @font-face {
@@ -15,35 +34,30 @@
       src: url('fonts/BodoniSmallCaps72.ttf') format('truetype');
       font-weight: normal;
       font-style: normal;
+      font-display: swap;
     }
 
     :root {
-      --primary: #A98C7D;
-      /* Marrón tierra basado en el logo */
+      --primary: #3f3530;
       --secondary: #6B5E54;
-      /* Gris oscuro basado en el logo */
       --background: #F8F6F3;
-      /* Crema claro para fondo */
       --accent: #FFFFFF;
-      /* Blanco para contraste */
       --text-dark: #333;
       --text-light: #FFF;
+      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+      --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
+      --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    .btn-primary {
-      padding: 12px 28px;
-      border-radius: 999px;
-      border: none;
-      background: var(--accent);
-      color: white;
-      font-weight: 500;
-      cursor: pointer;
-      transition: all .2s ease;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
 
-    .btn-primary:hover {
-      opacity: 0.85;
-      transform: translateY(-1px);
+    html {
+      scroll-behavior: smooth;
     }
 
     body {
@@ -52,107 +66,231 @@
       background-color: var(--background);
       color: var(--text-dark);
       line-height: 1.6;
+      overflow-x: hidden;
     }
 
+    /* Header con slider de imágenes */
     header {
-      background-color: var(--secondary);
+      position: relative;
       color: var(--text-light);
       text-align: center;
-      padding: 30px 20px;
+      padding: 80px 20px;
+      overflow: hidden;
+      min-height: 400px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .header-slider {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
+
+    .header-slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      transition: opacity 2s ease-in-out;
+    }
+
+    .header-slide.active {
+      opacity: 1;
+    }
+
+    .header-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(107, 94, 84, 0.6);
+      z-index: 1;
+    }
+
+    header h1,
+    header p {
+      position: relative;
+      z-index: 2;
     }
 
     header h1 {
       font-family: 'BodoniSmallCaps72', serif;
-      font-size: 2.8rem;
-      letter-spacing: 3px;
+      font-size: clamp(2.5rem, 8vw, 4rem);
+      letter-spacing: 4px;
       font-weight: normal;
+      animation: fadeInDown 1s ease;
+      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
     }
 
     header p {
-      margin: 10px 0 0;
-      font-size: 1.1rem;
+      margin: 15px 0 0;
+      font-size: clamp(1rem, 3vw, 1.3rem);
       font-family: 'Lora', serif;
       font-style: italic;
-      opacity: 0.9;
+      animation: fadeInUp 1s ease 0.3s both;
+      text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
     }
 
+    /* Navegación sticky mejorada */
     nav {
       background-color: var(--primary);
       text-align: center;
-      padding: 12px;
+      padding: 15px 20px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: var(--shadow-md);
+      backdrop-filter: blur(10px);
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
     }
 
     nav a {
       color: var(--text-light);
-      margin: 0 15px;
+      padding: 8px 16px;
       text-decoration: none;
       font-size: 0.95rem;
       font-family: 'Lora', serif;
       font-weight: 500;
-      transition: all 0.3s ease;
+      border-radius: 25px;
+      transition: var(--transition);
+      position: relative;
     }
 
-    nav a:hover {
-      text-decoration: underline;
-      color: #FFF;
-      letter-spacing: 0.5px;
+    nav a:hover,
+    nav a.active {
+      background-color: rgba(255, 255, 255, 0.2);
+      transform: translateY(-2px);
     }
 
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.5rem;
+      cursor: pointer;
+      padding: 5px;
+    }
+
+    /* Container mejorado */
     .container {
-      max-width: 1000px;
-      margin: 40px auto;
-      padding: 0 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 60px 20px;
     }
 
     h2 {
       text-align: center;
-      margin-bottom: 30px;
+      margin-bottom: 40px;
       font-family: 'Lora', serif;
-      font-weight: 500;
+      font-weight: 600;
       color: var(--secondary);
       letter-spacing: 1px;
+      font-size: clamp(1.8rem, 5vw, 2.5rem);
+      position: relative;
+      padding-bottom: 15px;
+    }
+
+    h2::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      border-radius: 2px;
     }
 
     .intro-text {
       text-align: center;
-      max-width: 600px;
-      margin: 0 auto 40px;
-      font-size: 1.1rem;
-      color: #555;
+      max-width: 700px;
+      margin: 0 auto 50px;
+      font-size: 1.15rem;
+      color: #666;
+      line-height: 1.8;
     }
 
+    /* Grid de categorías mejorado */
     .categories-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 20px;
-      margin-bottom: 50px;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 25px;
+      margin-bottom: 60px;
     }
 
     .category-card {
       background: white;
-      border-radius: 10px;
-      padding: 25px 15px;
+      border-radius: 15px;
+      padding: 35px 20px;
       text-align: center;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      box-shadow: var(--shadow-sm);
       cursor: pointer;
-      transition: all 0.3s ease;
+      transition: var(--transition);
+      border: 2px solid transparent;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .category-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+    }
+
+    .category-card:hover::before {
+      transform: scaleX(1);
     }
 
     .category-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
-      border-top: 3px solid var(--primary);
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--primary);
     }
 
     .category-card h3 {
       margin: 0 0 10px;
       font-family: 'Lora', serif;
       color: var(--secondary);
+      font-size: 1.3rem;
     }
 
+    .category-card p {
+      color: #888;
+      font-size: 0.9rem;
+    }
+
+    /* Secciones de productos */
     .products-section {
       display: none;
-      padding: 30px 0;
+      padding: 40px 0;
+      animation: fadeIn 0.5s ease;
     }
 
     .products-section.active {
@@ -161,106 +299,380 @@
 
     .products-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 25px;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 30px;
+      margin-bottom: 40px;
     }
 
     .product-card {
       background: white;
-      border-radius: 10px;
+      border-radius: 15px;
       overflow: hidden;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-      transition: all 0.3s ease;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+      position: relative;
     }
 
     .product-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .product-image-wrapper {
+      position: relative;
+      overflow: hidden;
+      padding-top: 100%;
     }
 
     .product-image {
+      position: absolute;
+      top: 0;
+      left: 0;
       width: 100%;
-      height: 220px;
+      height: 100%;
       object-fit: cover;
-      background: #f0f0f0;
-      border-bottom: 1px solid #eee;
+      transition: transform 0.5s ease;
+    }
+
+    .product-card:hover .product-image {
+      transform: scale(1.08);
+    }
+
+    .product-badge {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: var(--primary);
+      color: white;
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      z-index: 2;
     }
 
     .product-info {
-      padding: 16px;
+      padding: 20px;
       text-align: center;
     }
 
     .product-info h3 {
-      margin: 0 0 6px;
+      margin: 0 0 10px;
       font-family: 'Lora', serif;
-      font-size: 1.15rem;
+      font-size: 1.2rem;
       color: var(--secondary);
+      font-weight: 600;
     }
 
     .product-info p.price {
-      font-weight: bold;
+      font-weight: 700;
       color: var(--primary);
+      font-size: 1.3rem;
       margin: 0;
     }
 
+    /* Selector de colores para productos */
+    .color-selector {
+      margin: 12px 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .color-label {
+      font-size: 0.85rem;
+      color: #666;
+      font-weight: 500;
+    }
+
+    .color-option {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 3px solid white;
+      box-shadow: 0 0 0 2px var(--primary);
+      cursor: pointer;
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .color-option:hover {
+      transform: scale(1.15);
+    }
+
+    .color-option.active {
+      box-shadow: 0 0 0 3px var(--secondary);
+      transform: scale(1.1);
+    }
+
+    .product-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 15px;
+      justify-content: center;
+    }
+
+    .btn {
+      padding: 10px 20px;
+      border-radius: 25px;
+      border: none;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      font-family: 'Lora', serif;
+      font-size: 0.9rem;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: var(--secondary);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
     .back-btn {
-      display: inline-block;
-      margin-top: 25px;
-      padding: 10px 24px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 30px;
+      padding: 12px 28px;
       background: var(--primary);
       color: white;
       text-decoration: none;
-      border-radius: 6px;
+      border-radius: 30px;
       font-family: 'Lora', serif;
-      font-weight: 500;
-      transition: background 0.3s;
+      font-weight: 600;
+      transition: var(--transition);
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
     }
 
     .back-btn:hover {
       background: var(--secondary);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
     }
 
-
-    .btn-insta:active {
-      transform: translateY(0);
-    }
-
+    /* Contacto mejorado */
     .contact {
-      margin-top: 60px;
-      background: var(--secondary);
+      margin-top: 80px;
+      background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
       color: var(--text-light);
-      padding: 40px 20px;
+      padding: 60px 40px;
       text-align: center;
-      border-radius: 12px;
+      border-radius: 20px;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .contact h2 {
+      color: white;
+      margin-bottom: 20px;
+    }
+
+    .contact h2::after {
+      background: rgba(255, 255, 255, 0.5);
+    }
+
+    .contact p {
+      font-size: 1.1rem;
+      margin-bottom: 30px;
+      opacity: 0.95;
+    }
+
+    .contact-buttons {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
     }
 
     .contact a {
-      display: inline-block;
-      margin: 10px;
-      padding: 12px 24px;
-      border: 1px solid white;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 15px 30px;
+      border: 2px solid white;
       border-radius: 30px;
       color: white;
       text-decoration: none;
-      font-weight: bold;
+      font-weight: 600;
       font-family: 'Lora', serif;
-      transition: all 0.3s;
+      transition: var(--transition);
+      background: transparent;
     }
 
     .contact a:hover {
       background: white;
       color: var(--secondary);
-      transform: scale(1.03);
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-lg);
     }
 
+    /* WhatsApp Float Button */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 60px;
+      height: 60px;
+      background: #7a705e;
+      color: white;
+      border-radius: 50%;
+      text-align: center;
+      font-size: 30px;
+      box-shadow: var(--shadow-lg);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      transition: var(--transition);
+      animation: pulse 2s infinite;
+    }
+
+    .whatsapp-float:hover {
+      transform: scale(1.1);
+      box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+    }
+
+    /* Footer mejorado */
     footer {
       text-align: center;
-      padding: 25px;
-      font-size: 0.85rem;
+      padding: 40px 20px;
+      font-size: 0.9rem;
       color: #777;
-      margin-top: 40px;
-      border-top: 1px solid #eee;
+      margin-top: 60px;
+      border-top: 2px solid #eee;
+      background: white;
+    }
+
+    footer p {
+      margin: 5px 0;
+    }
+
+    /* Animaciones */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.05);
+      }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .mobile-menu-btn {
+        display: block;
+      }
+
+      .nav-container {
+        display: none;
+        width: 100%;
+        flex-direction: column;
+        gap: 5px;
+      }
+
+      .nav-container.active {
+        display: flex;
+      }
+
+      nav a {
+        width: 100%;
+        text-align: center;
+      }
+
+      .products-grid {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: 15px;
+      }
+
+      .categories-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+      }
+
+      .category-card {
+        padding: 25px 15px;
+      }
+
+      .contact {
+        padding: 40px 20px;
+      }
+
+      .contact-buttons {
+        flex-direction: column;
+      }
+
+      .whatsapp-float {
+        width: 50px;
+        height: 50px;
+        font-size: 24px;
+        bottom: 20px;
+        right: 20px;
+      }
+
+      header {
+        min-height: 300px;
+        padding: 60px 20px;
+      }
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 60px 20px;
+      color: #999;
+      grid-column: 1 / -1;
+    }
+
+    .empty-state-icon {
+      font-size: 4rem;
+      margin-bottom: 20px;
+      opacity: 0.5;
     }
   </style>
 </head>
@@ -268,392 +680,957 @@
 <body>
 
   <header>
-    <h1>LeGland</h1>
-    <p>Joyas de acero inoxidable</p>
+    <div class="header-slider">
+      <div class="header-slide active" style="background-image: url('images/header/fondo1.jpg');"></div>
+      <div class="header-slide" style="background-image: url('images/header/fondo2.jpg');"></div>
+      <div class="header-slide" style="background-image: url('images/header/fondo3.jpg');"></div>
+    </div>
+    <div class="header-overlay"></div>
+    <div style="position: relative; z-index: 2;">
+      <h1>LeGland</h1>
+      <p>Joyas de acero inoxidable</p>
+    </div>
   </header>
 
   <nav>
-    <a href="#" class="nav-link" data-section="collares">Collares</a>
-    <a href="#" class="nav-link" data-section="pendientes">Pendientes</a>
-    <a href="#" class="nav-link" data-section="pulseras">Pulseras</a>
-    <a href="#" class="nav-link" data-section="anillos">Anillos</a>
-    <a href="#" class="nav-link" data-section="conjuntos">Conjuntos</a>
+    <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+    <div class="nav-container" id="navContainer">
+      <a href="#" class="nav-link active" data-section="categorias">Inicio</a>
+      <a href="#" class="nav-link" data-section="collares">Collares</a>
+      <a href="#" class="nav-link" data-section="pendientes">Pendientes</a>
+      <a href="#" class="nav-link" data-section="pulseras">Pulseras</a>
+      <a href="#" class="nav-link" data-section="anillos">Anillos</a>
+      <a href="#" class="nav-link" data-section="earcuffs">Earcuffs</a>
+      <a href="#" class="nav-link" data-section="accesorios">Accesorios</a>
+      <a href="#" class="nav-link" data-section="conjuntos">Conjuntos</a>
+    </div>
   </nav>
 
   <div class="container">
 
     <!-- Sección principal: Categorías -->
-    <div id="section-categorias">
+    <div id="section-categorias" class="section-content">
       <h2>Explora nuestras colecciones</h2>
-      <p class="intro-text">¡Contáctanos para cualquier duda!
-      </p>
 
       <div class="categories-grid">
-        <div class="category-card" data-section="collares">
+        <div class="category-card" data-section="collares" tabindex="0">
           <h3>Collares</h3>
-          <p></p>
         </div>
-        <div class="category-card" data-section="pendientes">
+        <div class="category-card" data-section="pendientes" tabindex="0">
           <h3>Pendientes</h3>
-          <p></p>
         </div>
-        <div class="category-card" data-section="pulseras">
+        <div class="category-card" data-section="pulseras" tabindex="0">
           <h3>Pulseras</h3>
-          <p></p>
         </div>
-        <div class="category-card" data-section="anillos">
+        <div class="category-card" data-section="anillos" tabindex="0">
           <h3>Anillos</h3>
-          <p></p>
         </div>
-        <div class="category-card" data-section="conjuntos">
-  <h3>Conjuntos</h3>
-  <p></p>
-</div>
+        <div class="category-card" data-section="earcuffs" tabindex="0">
+          <h3>Earcuffs</h3>
+        </div>
+        <div class="category-card" data-section="accesorios" tabindex="0">
+          <h3>Accesorios</h3>
+        </div>
+        <div class="category-card" data-section="conjuntos" tabindex="0">
+          <h3>Conjuntos</h3>
+        </div>
       </div>
     </div>
 
-    <!-- Sección Collares -->
+    <!-- Sección Collares - PRECIOS ORIGINALES -->
     <div id="section-collares" class="products-section">
       <h2>Collares</h2>
       <div class="products-grid">
+
+        <!-- CADENA DE LA VIRGEN - 3 COLORES -->
         <div class="product-card">
-          <img src="images/collares/collaresfondo/lluviarosa.png" alt="Collar Minimalista" class="product-image">
+          <div class="product-image-wrapper">
+            <img src="images/collares/virgenBlanca.jpeg" alt="Cadena Virgen" class="product-image" id="virgen-img"
+              loading="lazy">
+          </div>
+          <div class="product-info">
+            <h3>Cadena Virgen</h3>
+            <div class="color-selector">
+              <span class="color-label">Colores:</span>
+              <button class="color-option active" style="background-color: #d192c9;"
+                onclick="cambiarColor('virgen', this, 'images/collares/virgenRosa.jpeg')" title="Rosa"></button>
+              <button class="color-option" style="background-color: #C0C0C0;"
+                onclick="cambiarColor('virgen', this, 'images/collares/virgenBlanca.jpeg')" title="Blanca"></button>
+              <button class="color-option" style="background-color: #412227;"
+                onclick="cambiarColor('virgen', this, 'images/collares/virgenMulticolor.jpeg')"
+                title="Multicolor"></button>
+            </div>
+            <p class="price">20€</p>
+            <div class="product-actions">
+              <button class="btn btn-primary" onclick="consultarProducto('Cadena Virgen', 20)">Consultar</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- CHOCKER CRISTAL - 2 COLORES -->
+        <div class="product-card">
+          <div class="product-image-wrapper">
+            <img src="images/collares/collaresfondo/vinocristal.png" alt="Chocker Cristal" class="product-image"
+              id="cristal-img" loading="lazy">
+          </div>
+          <div class="product-info">
+            <h3>Chocker Cristal</h3>
+            <div class="color-selector">
+              <span class="color-label">Colores:</span>
+              <button class="color-option active" style="background-color: #783a3a;"
+                onclick="cambiarColor('cristal', this, 'images/collares/collaresfondo/vinocristal.png')"
+                title="Vino"></button>
+              <button class="color-option" style="background-color: #4d9596;"
+                onclick="cambiarColor('cristal', this, 'images/collares/collaresfondo/marcristal.jpg')"
+                title="Mar"></button>
+            </div>
+            <p class="price">20€</p>
+            <div class="product-actions">
+              <button class="btn btn-primary" onclick="consultarProducto('Chocker Cristal', 20)">Consultar</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-image-wrapper">
+            <img src="images/collares/collaresfondo/collarvid.png" alt="Collar LLuvia-Rosa" class="product-image"
+              loading="lazy">
+          </div>
+          <div class="product-info">
+            <h3>Collar Vid</h3>
+            <p class="price">25€</p>
+            <div class="product-actions">
+              <button class="btn btn-primary" onclick="consultarProducto('Collar Vid', 25)">Consultar</button>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="product-card">
+          <div class="product-image-wrapper">
+            <img src="images/collares/collaresfondo/duo.png" alt="Collar Dúo" class="product-image" loading="lazy">
+          </div>
+          <div class="product-info">
+            <h3>Collar Dúo</h3>
+            <p class="price">17€</p>
+            <div class="product-actions">
+              <button class="btn btn-primary" onclick="consultarProducto('Collar Dúo', 17)">Consultar</button>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="product-card">
+          <div class="product-image-wrapper">
+            <img src="images/collares/collaresfondo/lluviarosa.png" alt="Collar LLuvia-Rosa" class="product-image"
+              loading="lazy">
+          </div>
           <div class="product-info">
             <h3>Collar LLuvia-Rosa</h3>
             <p class="price">17€</p>
+            <div class="product-actions">
+              <button class="btn btn-primary" onclick="consultarProducto('Collar LLuvia-Rosa', 17)">Consultar</button>
+            </div>
           </div>
         </div>
+
+
         <div class="product-card">
-          <img src="images/collares/collaresfondo/cadenaperlas.png" alt="Collar con Colgante" class="product-image">
+          <div class="product-image-wrapper">
+            <img src="images/collares/collaresfondo/cadenaperlas.png" alt="Chocker Cadena-Perlas" class="product-image"
+              loading="lazy">
+          </div>
           <div class="product-info">
             <h3>Chocker Cadena-Perlas</h3>
             <p class="price">21€</p>
+            <div class="product-actions">
+              <button class="btn btn-primary"
+                onclick="consultarProducto('Chocker Cadena-Perlas', 21)">Consultar</button>
+            </div>
           </div>
         </div>
+
         <div class="product-card">
-          <img src="images/collares/collaresfondo/olabrilli.png" alt="Collar con Colgante" class="product-image">
+          <div class="product-image-wrapper">
+            <img src="images/collares/collaresfondo/olabrilli.png" alt="Chocker Ola-Brillis" class="product-image"
+              loading="lazy">
+          </div>
           <div class="product-info">
             <h3>Chocker Ola-Brillis</h3>
             <p class="price">16€</p>
+            <div class="product-actions">
+              <button class="btn btn-primary" onclick="consultarProducto('Chocker Ola-Brillis', 16)">Consultar</button>
+            </div>
           </div>
         </div>
+
         <div class="product-card">
-          <img src="images/collares/collaresfondo/ovaloscollar.png" alt="Collar con Colgante" class="product-image">
+          <div class="product-image-wrapper">
+            <img src="images/collares/collaresfondo/ovaloscollar.png" alt="Collar Ovalos" class="product-image"
+              loading="lazy">
+          </div>
           <div class="product-info">
             <h3>Collar Ovalos</h3>
             <p class="price">21€</p>
+            <div class="product-actions">
+              <button class="btn btn-primary" onclick="consultarProducto('Collar Ovalos', 21)">Consultar</button>
+            </div>
           </div>
         </div>
+
         <div class="product-card">
-          <img src="images/collares/collaresfondo/colorcristal.png" alt="Collar con Colgante" class="product-image">
+          <div class="product-image-wrapper">
+            <img src="images/collares/collaresfondo/colorcristal.png" alt="Chocker Cristal-Color" class="product-image"
+              loading="lazy">
+          </div>
           <div class="product-info">
             <h3>Chocker Cristal-Color</h3>
             <p class="price">19€</p>
+            <div class="product-actions">
+              <button class="btn btn-primary"
+                onclick="consultarProducto('Chocker Cristal-Color', 19)">Consultar</button>
+            </div>
           </div>
         </div>
+
+
+
         <div class="product-card">
-          <img src="images/collares/collaresfondo/vinocristal.png" alt="Collar Minimalista" class="product-image">
-          <div class="product-info">
-            <h3>Chocker Cristal-Vino</h3>
-            <p class="price">20€</p>
+          <div class="product-image-wrapper">
+            <img src="images/collares/collaresfondo/picoscollar.png" alt="Collar Picos" class="product-image"
+              loading="lazy">
           </div>
-        </div>
-        <div class="product-card">
-          <img src="images/collares/collaresfondo/picoscollar.png" alt="Collar Minimalista" class="product-image">
           <div class="product-info">
             <h3>Collar Picos</h3>
             <p class="price">24€</p>
+            <div class="product-actions">
+              <button class="btn btn-primary" onclick="consultarProducto('Collar Picos', 24)">Consultar</button>
+            </div>
           </div>
         </div>
+
         <div class="product-card">
-          <img src="images/collares/collaresfondo/paupi.png" alt="Collar Minimalista" class="product-image">
+          <div class="product-image-wrapper">
+            <img src="images/collares/collaresfondo/paupi.png" alt="Chocker Paupi" class="product-image" loading="lazy">
+          </div>
           <div class="product-info">
             <h3>Chocker Paupi</h3>
             <p class="price">25€</p>
+            <div class="product-actions">
+              <button class="btn btn-primary" onclick="consultarProducto('Chocker Paupi', 25)">Consultar</button>
+            </div>
           </div>
         </div>
+
         <div class="product-card">
-          <img src="images/collares/collaresfondo/cleo.png" alt="Collar Minimalista" class="product-image">
+          <div class="product-image-wrapper">
+            <img src="images/collares/collaresfondo/cleo.png" alt="Collar Cleo" class="product-image" loading="lazy">
+          </div>
           <div class="product-info">
             <h3>Collar Cleo</h3>
             <p class="price">21€</p>
+            <div class="product-actions">
+              <button class="btn btn-primary" onclick="consultarProducto('Collar Cleo', 21)">Consultar</button>
+            </div>
           </div>
         </div>
+
         <div class="product-card">
-          <img src="images/collares/collaresfondo/acerocristalitos.png" alt="Collar Minimalista" class="product-image">
+          <div class="product-image-wrapper">
+            <img src="images/collares/collaresfondo/acerocristalitos.png" alt="Collar Cristales-Colores"
+              class="product-image" loading="lazy">
+          </div>
           <div class="product-info">
             <h3>Collar Cristales-Colores</h3>
             <p class="price">21€</p>
+            <div class="product-actions">
+              <button class="btn btn-primary"
+                onclick="consultarProducto('Collar Cristales-Colores', 21)">Consultar</button>
+            </div>
           </div>
         </div>
+
         <div class="product-card">
-          <img src="images/collares/collaresfondo/ramanegro.png" alt="Collar con Colgante" class="product-image">
+          <div class="product-image-wrapper">
+            <img src="images/collares/collaresfondo/ramanegro.png" alt="Collar Cristal-Negro" class="product-image"
+              loading="lazy">
+          </div>
           <div class="product-info">
-            <h3>Collar Rama-Negro</h3>
+            <h3>Collar Cristal-Negro</h3>
             <p class="price">18€</p>
+            <div class="product-actions">
+              <button class="btn btn-primary" onclick="consultarProducto('Collar Cristal-Negro', 18)">Consultar</button>
+            </div>
           </div>
         </div>
+
         <div class="product-card">
-          <img src="images/collares/collaresfondo/cristalazul.png" alt="Collar Cadena Fina" class="product-image">
+          <div class="product-image-wrapper">
+            <img src="images/collares/collaresfondo/cristalazul.png" alt="Chocker Cristal-Azul" class="product-image"
+              loading="lazy">
+          </div>
           <div class="product-info">
             <h3>Chocker Cristal-Azul</h3>
             <p class="price">21€</p>
-
+            <div class="product-actions">
+              <button class="btn btn-primary" onclick="consultarProducto('Chocker Cristal-Azul', 21)">Consultar</button>
+            </div>
           </div>
         </div>
       </div>
-
-      <a href="#" class="back-btn" data-back>← Volver a categorías</a>
+      <div style="text-align: center;">
+        <button class="back-btn" onclick="showCategories()">← Volver a categorías</button>
+      </div>
     </div>
 
-
-
-    <!-- Sección Pendientes -->
+    <!-- Sección Pendientes - PRECIOS ORIGINALES -->
     <div id="section-pendientes" class="products-section">
       <h2>Pendientes</h2>
       <div class="products-grid">
+
         <div class="product-card">
-          <img src="images/pendientes/pendientes fondo/ovalospend.png" alt="Pendiente Estrella" class="product-image">
+          <div class="product-image-wrapper">
+            <img src="images/pendientes/pendientes fondo/cuadrados.png" alt="Pendientes Cuadrados" class="product-image"
+              loading="lazy">
+          </div>
           <div class="product-info">
-            <h3>Pendiente Ovalos</h3>
+            <h3>Pendientes Cuadrados</h3>
             <p class="price">15€</p>
+            <div class="product-actions">
+              <button class="btn btn-primary" onclick="consultarProducto('Pendientes Cuadrados', 15)">Consultar</button>
+            </div>
           </div>
         </div>
+
         <div class="product-card">
-          <img src="images/pendientes/pendientes fondo/cuac.png" alt="Pendiente Minimalista" class="product-image">
+          <div class="product-image-wrapper">
+            <img src="images/pendientes/pendientes fondo/soleil.png" alt="Pendiente Aro-Triple" class="product-image"
+              loading="lazy">
+          </div>
           <div class="product-info">
-            <h3>Pendiente Cuac</h3>
-            <p class="price">14€</p>
+            <h3>Pendiente Soleil</h3>
+            <p class="price">17€</p>
+            <div class="product-actions">
+              <button class="btn btn-primary" onclick="consultarProducto('Pendiente Soleil', 17)">Consultar</button>
+            </div>
           </div>
         </div>
+
         <div class="product-card">
-          <img src="images/pendientes/pendientes fondo/diluvio.png" alt="Pendiente Circular" class="product-image">
-          <div class="product-info">
-            <h3>Pendiente Diluvio</h3>
-            <p class="price">16€</p>
+          <div class="product-image-wrapper">
+            <img src="images/pendientes/pendientes fondo/inca.png" alt="Pendiente Inca" class="product-image"
+              loading="lazy">
           </div>
-        </div>
-        <div class="product-card">
-          <img src="images/pendientes/pendientes fondo/inca.png" alt="Pendiente Minimalista" class="product-image">
           <div class="product-info">
             <h3>Pendiente Inca</h3>
             <p class="price">16€</p>
+            <div class="product-actions">
+              <button class="btn btn-primary" onclick="consultarProducto('Pendiente Inca', 16)">Consultar</button>
+            </div>
           </div>
         </div>
+
         <div class="product-card">
-          <img src="images/pendientes/pendientes fondo/cleopendiente.png" alt="Pendiente Minimalista"
-            class="product-image">
+          <div class="product-image-wrapper">
+            <img src="images/pendientes/pendientes fondo/ovalospend.png" alt="Pendiente Ovalos" class="product-image"
+              loading="lazy">
+          </div>
+          <div class="product-info">
+            <h3>Pendiente Ovalos</h3>
+            <p class="price">15€</p>
+            <div class="product-actions">
+              <button class="btn btn-primary" onclick="consultarProducto('Pendiente Ovalos', 15)">Consultar</button>
+            </div>
+          </div>
+        </div>
+
+
+
+        <div class="product-card">
+          <div class="product-image-wrapper">
+            <img src="images/pendientes/pendientes fondo/cuac.png" alt="Pendiente Cuac" class="product-image"
+              loading="lazy">
+          </div>
+          <div class="product-info">
+            <h3>Pendiente Cuac</h3>
+            <p class="price">14€</p>
+            <div class="product-actions">
+              <button class="btn btn-primary" onclick="consultarProducto('Pendiente Cuac', 14)">Consultar</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-image-wrapper">
+            <img src="images/pendientes/pendientes fondo/diluvio.png" alt="Pendiente Diluvio" class="product-image"
+              loading="lazy">
+          </div>
+          <div class="product-info">
+            <h3>Pendiente Diluvio</h3>
+            <p class="price">16€</p>
+            <div class="product-actions">
+              <button class="btn btn-primary" onclick="consultarProducto('Pendiente Diluvio', 16)">Consultar</button>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="product-card">
+          <div class="product-image-wrapper">
+            <img src="images/pendientes/pendientes fondo/cleopendiente.png" alt="Pendiente Cleo" class="product-image"
+              loading="lazy">
+          </div>
           <div class="product-info">
             <h3>Pendiente Cleo</h3>
             <p class="price">14€</p>
+            <div class="product-actions">
+              <button class="btn btn-primary" onclick="consultarProducto('Pendiente Cleo', 14)">Consultar</button>
+            </div>
           </div>
         </div>
+
         <div class="product-card">
-          <img src="images/pendientes/pendientes fondo/tini.png" alt="Pendiente Minimalista" class="product-image">
+          <div class="product-image-wrapper">
+            <img src="images/pendientes/pendientes fondo/tini.png" alt="Pendiente Tini" class="product-image"
+              loading="lazy">
+          </div>
           <div class="product-info">
             <h3>Pendiente Tini</h3>
             <p class="price">14€</p>
+            <div class="product-actions">
+              <button class="btn btn-primary" onclick="consultarProducto('Pendiente Tini', 14)">Consultar</button>
+            </div>
           </div>
         </div>
+
         <div class="product-card">
-          <img src="images/pendientes/pendientes fondo/circoval.png" alt="Pendiente Circular" class="product-image">
+          <div class="product-image-wrapper">
+            <img src="images/pendientes/pendientes fondo/circoval.png" alt="Pendiente Ovalado-Circonitas"
+              class="product-image" loading="lazy">
+          </div>
           <div class="product-info">
             <h3>Pendiente Ovalado-Circonitas</h3>
             <p class="price">14€</p>
+            <div class="product-actions">
+              <button class="btn btn-primary"
+                onclick="consultarProducto('Pendiente Ovalado-Circonitas', 14)">Consultar</button>
+            </div>
           </div>
         </div>
+
         <div class="product-card">
-          <img src="images/pendientes/pendientes fondo/ovaladocirconitas.png" alt="Pendiente Minimalista"
-            class="product-image">
+          <div class="product-image-wrapper">
+            <img src="images/pendientes/pendientes fondo/ovaladocirconitas.png" alt="Pendiente Aro-Circonitas"
+              class="product-image" loading="lazy">
+          </div>
           <div class="product-info">
             <h3>Pendiente Aro-Circonitas</h3>
             <p class="price">15€</p>
+            <div class="product-actions">
+              <button class="btn btn-primary"
+                onclick="consultarProducto('Pendiente Aro-Circonitas', 15)">Consultar</button>
+            </div>
           </div>
         </div>
+
         <div class="product-card">
-          <img src="images/pendientes/pendientes fondo/donut.png" alt="Pendiente Minimalista" class="product-image">
+          <div class="product-image-wrapper">
+            <img src="images/pendientes/pendientes fondo/donut.png" alt="Pendiente Donut" class="product-image"
+              loading="lazy">
+          </div>
           <div class="product-info">
             <h3>Pendiente Donut</h3>
             <p class="price">15€</p>
+            <div class="product-actions">
+              <button class="btn btn-primary" onclick="consultarProducto('Pendiente Donut', 15)">Consultar</button>
+            </div>
           </div>
         </div>
 
         <div class="product-card">
-          <img src="images/pendientes/pendientes fondo/ministarb.png" alt="Pendiente Minimalista" class="product-image">
+          <div class="product-image-wrapper">
+            <img src="images/pendientes/pendientes fondo/ministarb.png" alt="Pendiente Mini-Star Black"
+              class="product-image" loading="lazy">
+          </div>
           <div class="product-info">
-            <h3>Pendiente Mini-Star</h3>
+            <h3>Pendiente Mini-Star Black</h3>
             <p class="price">12€</p>
+            <div class="product-actions">
+              <button class="btn btn-primary"
+                onclick="consultarProducto('Pendiente Mini-Star Black', 12)">Consultar</button>
+            </div>
           </div>
         </div>
+
         <div class="product-card">
-          <img src="images/pendientes/pendientes fondo/ministarw.png" alt="Pendiente Minimalista" class="product-image">
+          <div class="product-image-wrapper">
+            <img src="images/pendientes/pendientes fondo/ministarw.png" alt="Pendiente Mini-Star White"
+              class="product-image" loading="lazy">
+          </div>
           <div class="product-info">
-            <h3>Pendiente Mini-Star</h3>
+            <h3>Pendiente Mini-Star White</h3>
             <p class="price">12€</p>
+            <div class="product-actions">
+              <button class="btn btn-primary"
+                onclick="consultarProducto('Pendiente Mini-Star White', 12)">Consultar</button>
+            </div>
           </div>
         </div>
+
         <div class="product-card">
-          <img src="images/pendientes/pendientes fondo/circonitas.png" alt="Pendiente Minimalista"
-            class="product-image">
+          <div class="product-image-wrapper">
+            <img src="images/pendientes/pendientes fondo/circonitas.png" alt="Pendiente Circonitas"
+              class="product-image" loading="lazy">
+          </div>
           <div class="product-info">
             <h3>Pendiente Circonitas</h3>
             <p class="price">15€</p>
+            <div class="product-actions">
+              <button class="btn btn-primary" onclick="consultarProducto('Pendiente Circonitas', 15)">Consultar</button>
+            </div>
           </div>
         </div>
+
         <div class="product-card">
-          <img src="images/pendientes/pendientes fondo/rueda.png" alt="Pendiente Minimalista" class="product-image">
+          <div class="product-image-wrapper">
+            <img src="images/pendientes/pendientes fondo/rueda.png" alt="Pendiente Rueda" class="product-image"
+              loading="lazy">
+          </div>
           <div class="product-info">
             <h3>Pendiente Rueda</h3>
             <p class="price">12€</p>
+            <div class="product-actions">
+              <button class="btn btn-primary" onclick="consultarProducto('Pendiente Rueda', 12)">Consultar</button>
+            </div>
           </div>
         </div>
+
         <div class="product-card">
-          <img src="images/pendientes/pendientes fondo/cadena.png" alt="Pendiente Minimalista" class="product-image">
+          <div class="product-image-wrapper">
+            <img src="images/pendientes/pendientes fondo/cadena.png" alt="Pendiente Cadena" class="product-image"
+              loading="lazy">
+          </div>
           <div class="product-info">
             <h3>Pendiente Cadena</h3>
             <p class="price">15€</p>
+            <div class="product-actions">
+              <button class="btn btn-primary" onclick="consultarProducto('Pendiente Cadena', 15)">Consultar</button>
+            </div>
           </div>
         </div>
+
         <div class="product-card">
-          <img src="images/pendientes/pendientes fondo/cadenitas.png" alt="Pendiente Minimalista" class="product-image">
+          <div class="product-image-wrapper">
+            <img src="images/pendientes/pendientes fondo/cadenitas.png" alt="Pendiente Cadenitas" class="product-image"
+              loading="lazy">
+          </div>
           <div class="product-info">
             <h3>Pendiente Cadenitas</h3>
             <p class="price">15€</p>
+            <div class="product-actions">
+              <button class="btn btn-primary" onclick="consultarProducto('Pendiente Cadenitas', 15)">Consultar</button>
+            </div>
           </div>
         </div>
+
         <div class="product-card">
-          <img src="images/pendientes/pendientes fondo/picomini.png" alt="Pendiente Minimalista" class="product-image">
+          <div class="product-image-wrapper">
+            <img src="images/pendientes/pendientes fondo/picomini.png" alt="Pendiente Pico-Mini" class="product-image"
+              loading="lazy">
+          </div>
           <div class="product-info">
             <h3>Pendiente Pico-Mini</h3>
             <p class="price">15€</p>
+            <div class="product-actions">
+              <button class="btn btn-primary" onclick="consultarProducto('Pendiente Pico-Mini', 15)">Consultar</button>
+            </div>
           </div>
         </div>
+
         <div class="product-card">
-          <img src="images/pendientes/pendientes fondo/pico.png" alt="Pendiente Minimalista" class="product-image">
+          <div class="product-image-wrapper">
+            <img src="images/pendientes/pendientes fondo/pico.png" alt="Pendiente Pico" class="product-image"
+              loading="lazy">
+          </div>
           <div class="product-info">
             <h3>Pendiente Pico</h3>
             <p class="price">17€</p>
+            <div class="product-actions">
+              <button class="btn btn-primary" onclick="consultarProducto('Pendiente Pico', 17)">Consultar</button>
+            </div>
           </div>
         </div>
+
         <div class="product-card">
-          <img src="images/pendientes/pendientes fondo/arotriple.png" alt="Pendiente Minimalista" class="product-image">
+          <div class="product-image-wrapper">
+            <img src="images/pendientes/pendientes fondo/arotriple.png" alt="Pendiente Aro-Triple" class="product-image"
+              loading="lazy">
+          </div>
           <div class="product-info">
             <h3>Pendiente Aro-Triple</h3>
             <p class="price">17€</p>
+            <div class="product-actions">
+              <button class="btn btn-primary" onclick="consultarProducto('Pendiente Aro-Triple', 17)">Consultar</button>
+            </div>
           </div>
         </div>
+
         <div class="product-card">
-          <img src="images/pendientes/pendientes fondo/concha.png" alt="Pendiente Minimalista" class="product-image">
+          <div class="product-image-wrapper">
+            <img src="images/pendientes/pendientes fondo/concha.png" alt="Pendiente Concha" class="product-image"
+              loading="lazy">
+          </div>
           <div class="product-info">
             <h3>Pendiente Concha</h3>
             <p class="price">15€</p>
+            <div class="product-actions">
+              <button class="btn btn-primary" onclick="consultarProducto('Pendiente Concha', 15)">Consultar</button>
+            </div>
           </div>
         </div>
+
         <div class="product-card">
-          <img src="images/pendientes/pendientes fondo/cadenachapa.png" alt="Pendiente Minimalista"
-            class="product-image">
+          <div class="product-image-wrapper">
+            <img src="images/pendientes/pendientes fondo/cadenachapa.png" alt="Pendiente Cadena-Chapa"
+              class="product-image" loading="lazy">
+          </div>
           <div class="product-info">
             <h3>Pendiente Cadena-Chapa</h3>
             <p class="price">19€</p>
+            <div class="product-actions">
+              <button class="btn btn-primary"
+                onclick="consultarProducto('Pendiente Cadena-Chapa', 19)">Consultar</button>
+            </div>
           </div>
         </div>
+
         <div class="product-card">
-          <img src="images/pendientes/pendientes fondo/acerocristales.png" alt="Pendiente Minimalista"
-            class="product-image">
+          <div class="product-image-wrapper">
+            <img src="images/pendientes/pendientes fondo/acerocristales.png" alt="Pendiente Acero-Cristales"
+              class="product-image" loading="lazy">
+          </div>
           <div class="product-info">
-            <h3>Pendiente Cristales-Colores</h3>
+            <h3>Pendiente Acero-Cristales</h3>
             <p class="price">15€</p>
+            <div class="product-actions">
+              <button class="btn btn-primary"
+                onclick="consultarProducto('Pendiente Acero-Cristales', 15)">Consultar</button>
+            </div>
           </div>
         </div>
+
         <div class="product-card">
-          <img src="images/pendientes/pendientes fondo/lotti.png" alt="Pendiente Minimalista" class="product-image">
+          <div class="product-image-wrapper">
+            <img src="images/pendientes/pendientes fondo/lotti.png" alt="Pendiente Lotti" class="product-image"
+              loading="lazy">
+          </div>
           <div class="product-info">
             <h3>Pendiente Lotti</h3>
             <p class="price">14€</p>
+            <div class="product-actions">
+              <button class="btn btn-primary" onclick="consultarProducto('Pendiente Lotti', 14)">Consultar</button>
+            </div>
           </div>
         </div>
+
         <div class="product-card">
-          <img src="images/pendientes/pendientes fondo/cirmarron.png" alt="Pendiente Minimalista" class="product-image">
+          <div class="product-image-wrapper">
+            <img src="images/pendientes/pendientes fondo/cirmarron.png" alt="Pendiente Circulo-Marrón"
+              class="product-image" loading="lazy">
+          </div>
           <div class="product-info">
             <h3>Pendiente Circulo-Marrón</h3>
             <p class="price">15€</p>
+            <div class="product-actions">
+              <button class="btn btn-primary"
+                onclick="consultarProducto('Pendiente Circulo-Marrón', 15)">Consultar</button>
+            </div>
           </div>
         </div>
       </div>
-      <a href="#" class="back-btn" data-back>← Volver a categorías</a>
+      <div style="text-align: center;">
+        <button class="back-btn" onclick="showCategories()">← Volver a categorías</button>
+      </div>
     </div>
 
-    <!-- Sección Pulseras -->
+    <!-- Sección Pulseras - PRECIOS ORIGINALES -->
     <div id="section-pulseras" class="products-section">
       <h2>Pulseras</h2>
       <div class="products-grid">
+
         <div class="product-card">
-          <img src="images/pulseras/pulserasfondo/pulserapicos.png" alt="Pulsera" class="product-image">
+          <div class="product-image-wrapper">
+            <img src="images/pulseras/pulserasfondo/eclat.png" alt="Pulsera Éclat" class="product-image" loading="lazy">
+          </div>
+          <div class="product-info">
+            <h3>Brazalete Éclat</h3>
+            <p class="price">19€</p>
+            <div class="product-actions">
+              <button class="btn btn-primary" onclick="consultarProducto('Brazalete Éclat', 19)">Consultar</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-image-wrapper">
+            <img src="images/pulseras/pulserasfondo/pulserapicos.png" alt="Pulsera Picos" class="product-image"
+              loading="lazy">
+          </div>
           <div class="product-info">
             <h3>Pulsera Picos</h3>
             <p class="price">17€</p>
+            <div class="product-actions">
+              <button class="btn btn-primary" onclick="consultarProducto('Pulsera Picos', 17)">Consultar</button>
+            </div>
           </div>
         </div>
+
         <div class="product-card">
-          <img src="images/pulseras/pulserasfondo/brazaleterrama.png" alt="Pulsera" class="product-image">
+          <div class="product-image-wrapper">
+            <img src="images/pulseras/pulserasfondo/brazaleterrama.png" alt="Brazalete Hilos" class="product-image"
+              loading="lazy">
+          </div>
           <div class="product-info">
             <h3>Brazalete Hilos</h3>
             <p class="price">17€</p>
+            <div class="product-actions">
+              <button class="btn btn-primary" onclick="consultarProducto('Brazalete Hilos', 17)">Consultar</button>
+            </div>
           </div>
         </div>
+
         <div class="product-card">
-          <img src="images/pulseras/pulserasfondo/brazaletehercules.png" alt="Pulsera" class="product-image">
+          <div class="product-image-wrapper">
+            <img src="images/pulseras/pulserasfondo/brazaletehercules.png" alt="Brazalete Hércules"
+              class="product-image" loading="lazy">
+          </div>
           <div class="product-info">
             <h3>Brazalete Hércules</h3>
             <p class="price">19€</p>
+            <div class="product-actions">
+              <button class="btn btn-primary" onclick="consultarProducto('Brazalete Hércules', 19)">Consultar</button>
+            </div>
           </div>
         </div>
       </div>
-      <a href="#" class="back-btn" data-back>← Volver a categorías</a>
+      <div style="text-align: center;">
+        <button class="back-btn" onclick="showCategories()">← Volver a categorías</button>
+      </div>
     </div>
 
-    <!-- Sección Anillos -->
+    <!-- Sección Anillos - PRECIOS ORIGINALES -->
     <div id="section-anillos" class="products-section">
       <h2>Anillos</h2>
       <div class="products-grid">
+
         <div class="product-card">
-          <img src="images/anillos/anillosfondo/anilloabstracto.png" alt="Anillo Simple" class="product-image">
+          <div class="product-image-wrapper">
+            <img src="images/anillos/anillodor.png" alt="Anillo Picos" class="product-image" loading="lazy">
+          </div>
+          <div class="product-info">
+            <h3>Anillo Martelé</h3>
+            <p class="price">15€</p>
+            <div class="product-actions">
+              <button class="btn btn-primary" onclick="consultarProducto('Anillo Martelé', 15)">Consultar</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-image-wrapper">
+            <img src="images/anillos/cirulo.png" alt="Anillo Circulo" class="product-image" loading="lazy">
+          </div>
+          <div class="product-info">
+            <h3>Anillo circulo</h3>
+            <p class="price">15€</p>
+            <div class="product-actions">
+              <button class="btn btn-primary" onclick="consultarProducto('Anillo Circulo', 15)">Consultar</button>
+            </div>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-image-wrapper">
+            <img src="images/anillos/anilloabstracto.png" alt="Anillo Abstracto" class="product-image" loading="lazy">
+          </div>
           <div class="product-info">
             <h3>Anillo Abstracto</h3>
             <p class="price">13€</p>
+            <div class="product-actions">
+              <button class="btn btn-primary" onclick="consultarProducto('Anillo Abstracto', 13)">Consultar</button>
+            </div>
           </div>
         </div>
+
         <div class="product-card">
-          <img src="images/anillos/anillosfondo/anillogrueso.png" alt="Anillo con Piedra" class="product-image">
+          <div class="product-image-wrapper">
+            <img src="images/anillos/anillogrueso.png" alt="Anillo Nudos-Gruesos" class="product-image" loading="lazy">
+          </div>
           <div class="product-info">
             <h3>Anillo Nudos-Gruesos</h3>
             <p class="price">13€</p>
+            <div class="product-actions">
+              <button class="btn btn-primary" onclick="consultarProducto('Anillo Nudos-Gruesos', 13)">Consultar</button>
+            </div>
           </div>
         </div>
+
         <div class="product-card">
-          <img src="images/anillos/anillosfondo/anilloflor.png" alt="Anillo Nudos Gruesos" class="product-image">
+          <div class="product-image-wrapper">
+            <img src="images/anillos/anilloflor.png" alt="Anillo Flor" class="product-image" loading="lazy">
+          </div>
           <div class="product-info">
             <h3>Anillo Flor</h3>
             <p class="price">13€</p>
+            <div class="product-actions">
+              <button class="btn btn-primary" onclick="consultarProducto('Anillo Flor', 13)">Consultar</button>
+            </div>
           </div>
         </div>
+
         <div class="product-card">
-          <img src="images/anillos/anillosfondo/anillorama.png" alt="Anillo Doble" class="product-image">
+          <div class="product-image-wrapper">
+            <img src="images/anillos/anillorama.png" alt="Anillo Rama" class="product-image" loading="lazy">
+          </div>
           <div class="product-info">
             <h3>Anillo Rama</h3>
             <p class="price">15€</p>
+            <div class="product-actions">
+              <button class="btn btn-primary" onclick="consultarProducto('Anillo Rama', 15)">Consultar</button>
+            </div>
           </div>
         </div>
+
         <div class="product-card">
-          <img src="images/anillos/anillosfondo/PICOS.png" alt="Anillo Doble" class="product-image">
+          <div class="product-image-wrapper">
+            <img src="images/anillos/PICOS.png" alt="Anillo Picos" class="product-image" loading="lazy">
+          </div>
           <div class="product-info">
             <h3>Anillo Picos</h3>
             <p class="price">15€</p>
+            <div class="product-actions">
+              <button class="btn btn-primary" onclick="consultarProducto('Anillo Picos', 15)">Consultar</button>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+      <div style="text-align: center;">
+        <button class="back-btn" onclick="showCategories()">← Volver a categorías</button>
+      </div>
+    </div>
+
+    <!-- Sección Earcuffs -->
+    <div id="section-earcuffs" class="products-section">
+      <h2>Earcuffs</h2>
+      <div class="products-grid">
+        <div class="product-card">
+          <div class="product-image-wrapper">
+            <span class="product-badge">Nuevo</span>
+            <img src="images/earcuffs/estrella.png" alt="Earcuff Estrella" class="product-image" loading="lazy">
+          </div>
+          <div class="product-info">
+            <h3>Earcuff Estrella</h3>
+            <p class="price">12€</p>
+            <div class="product-actions">
+              <button class="btn btn-primary" onclick="consultarProducto('Earcuff Estrella', 12)">Consultar</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-image-wrapper">
+            <img src="images/earcuffs/cadena.png" alt="Earcuff Cadena" class="product-image" loading="lazy">
+          </div>
+          <div class="product-info">
+            <h3>Earcuff Cadena</h3>
+            <p class="price">12€</p>
+            <div class="product-actions">
+              <button class="btn btn-primary" onclick="consultarProducto('Earcuff Cadena', 12)">Consultar</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-image-wrapper">
+            <img src="images/earcuffs/circonitas.png" alt="Earcuff Circonitas" class="product-image" loading="lazy">
+          </div>
+          <div class="product-info">
+            <h3>Earcuff Circonitas</h3>
+            <p class="price">12€</p>
+            <div class="product-actions">
+              <button class="btn btn-primary" onclick="consultarProducto('Earcuff Circonitas', 12)">Consultar</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-image-wrapper">
+            <img src="images/earcuffs/triplr.png" alt="Earcuff Triple" class="product-image" loading="lazy">
+          </div>
+          <div class="product-info">
+            <h3>Earcuff Triple</h3>
+            <p class="price">12€</p>
+            <div class="product-actions">
+              <button class="btn btn-primary" onclick="consultarProducto('Earcuff Triple', 12)">Consultar</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-image-wrapper">
+            <img src="images/earcuffs/curvas.png" alt="Earcuff Curvas" class="product-image" loading="lazy">
+          </div>
+          <div class="product-info">
+            <h3>Earcuff Curvas</h3>
+            <p class="price">12€</p>
+            <div class="product-actions">
+              <button class="btn btn-primary" onclick="consultarProducto('Earcuff Curvas', 12)">Consultar</button>
+            </div>
           </div>
         </div>
       </div>
-      <a href="#" class="back-btn" data-back>← Volver a categorías</a>
+      <div style="text-align: center;">
+        <button class="back-btn" onclick="showCategories()">← Volver a categorías</button>
+      </div>
     </div>
+
+    <!-- Sección Accesorios -->
+    <div id="section-accesorios" class="products-section">
+      <h2>Accesorios</h2>
+      <div class="products-grid">
+        <!-- GORRO SPARKLE - 3 COLORES -->
+        <div class="product-card">
+          <div class="product-image-wrapper">
+            <span class="product-badge">Nuevo ✨</span>
+            <img src="images/accesorios/sparkleGorrito.png" alt="Gorro Sparkle" class="product-image" id="gorro-img"
+              loading="lazy">
+          </div>
+          <div class="product-info">
+            <h3>Gorro Sparkle</h3>
+            <p style="font-size: 0.85rem; color: #777; font-style: italic; margin-bottom: 10px;">
+              Gorro de crochet con brillantitos ✨
+            </p>
+            <div class="color-selector">
+              <span class="color-label">Colores:</span>
+              <button class="color-option active" style="background-color: #e7a41f;"
+                onclick="cambiarColor('gorro', this, 'images/accesorios/sparkleGorrito.png')" title="Amarillo"></button>
+              <button class="color-option" style="background-color: #3866aa;"
+                onclick="cambiarColor('gorro', this, 'images/accesorios/sparkleBlue.png')" title="Azul"></button>
+
+            </div>
+            <p class="price">22€</p>
+            <div class="product-actions">
+              <button class="btn btn-primary" onclick="consultarProducto('Gorro Sparkle', 22)">Consultar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="text-align: center;">
+        <button class="back-btn" onclick="showCategories()">← Volver a categorías</button>
+      </div>
+    </div>
+
 
     <!-- Sección Conjuntos -->
     <div id="section-conjuntos" class="products-section">
@@ -662,114 +1639,231 @@
       <!-- 🖼️ 2 Conjuntos con botones para cada pieza -->
       <div class="products-grid" style="grid-template-columns: repeat(2, 1fr); gap: 30px; margin-bottom: 40px;">
 
-  <!-- Conjunto Cleo -->
-  <div class="product-card">
-    <div style="display: flex; gap: 8px; justify-content: center; align-items: center; height: 180px; background: #f9f9f9; border-bottom: 1px solid #eee;">
-      <img src="images/collares/collaresfondo/cleo.png" alt="Collar Cleo" style="width: 40%; object-fit: contain;">
-      <img src="images/pendientes/pendientes fondo/cleopendiente.png" alt="Pendiente Cleo" style="width: 40%; object-fit: contain;">
+        <!-- Conjunto Cleo -->
+        <div class="product-card">
+          <div
+            style="display: flex; gap: 8px; justify-content: center; align-items: center; height: 180px; background: #f9f9f9; border-bottom: 1px solid #eee;">
+            <img src="images/collares/collaresfondo/cleo.png" alt="Collar Cleo"
+              style="width: 40%; object-fit: contain;">
+            <img src="images/pendientes/pendientes fondo/cleopendiente.png" alt="Pendiente Cleo"
+              style="width: 40%; object-fit: contain;">
+          </div>
+          <div class="product-info">
+            <h3>Conjunto Cleo</h3>
+            <p class="price">33€</p>
+            <div class="product-actions">
+              <button class="btn btn-primary" onclick="consultarProducto('Conjunto Cleo', 33)">Consultar</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Conjunto Cristal-Colores -->
+        <div class="product-card">
+          <div
+            style="display: flex; gap: 8px; justify-content: center; align-items: center; height: 180px; background: #f9f9f9; border-bottom: 1px solid #eee;">
+            <img src="images/collares/collaresfondo/acerocristalitos.png" alt="Collar Cristales"
+              style="width: 40%; object-fit: contain;">
+            <img src="images/pendientes/pendientes fondo/acerocristales.png" alt="Pendiente Cristales"
+              style="width: 40%; object-fit: contain;">
+          </div>
+          <div class="product-info">
+            <h3>Conjunto Cristal-Colores</h3>
+            <p class="price">34€</p>
+            <div class="product-actions">
+              <button class="btn btn-primary"
+                onclick="consultarProducto('Conjunto Cristal-Colores', 34)">Consultar</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- 🌟 Conjunto de 4 piezas (2 filas de 2) -->
+      <div class="products-grid" style="grid-template-columns: repeat(2, 1fr); gap: 30px; margin-bottom: 40px;">
+
+        <!-- Conjunto Picos (Collar + Pendientes) -->
+        <div class="product-card">
+          <div
+            style="display: flex; gap: 8px; justify-content: center; align-items: center; height: 180px; background: #f9f9f9; border-bottom: 1px solid #eee;">
+            <img src="images/collares/collaresfondo/picoscollar.png" alt="Collar Picos"
+              style="width: 40%; object-fit: contain;">
+            <img src="images/pendientes/pendientes fondo/pico.png" alt="Pendiente Picos"
+              style="width: 40%; object-fit: contain;">
+          </div>
+          <div class="product-info">
+            <h3>Conjunto Picos</h3>
+            <p class="price">39€</p>
+            <div class="product-actions">
+              <button class="btn btn-primary"
+                onclick="consultarProducto('Conjunto Picos - Collar y Pendientes', 39)">Consultar</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Conjunto Picos (Pulsera + Anillo) -->
+        <div class="product-card">
+          <div
+            style="display: flex; gap: 8px; justify-content: center; align-items: center; height: 180px; background: #f9f9f9; border-bottom: 1px solid #eee;">
+            <img src="images/pulseras/pulserasfondo/pulserapicos.png" alt="Pulsera Picos"
+              style="width: 40%; object-fit: contain;">
+            <img src="images/anillos/anillosfondo/PICOS.png" alt="Anillo Picos"
+              style="width: 40%; object-fit: contain;">
+          </div>
+          <div class="product-info">
+            <h3>Conjunto Picos</h3>
+            <p class="price">30€</p>
+            <div class="product-actions">
+              <button class="btn btn-primary"
+                onclick="consultarProducto('Conjunto Picos - Pulsera y Anillo', 30)">Consultar</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div style="text-align: center;">
+        <button class="back-btn" onclick="showCategories()">← Volver a categorías</button>
+      </div>
     </div>
-    <div class="product-info">
-      <h3>Conjunto Cleo</h3>
-      <p class="price">33€</p>
-    </div>
-  </div>
 
-  <!-- Conjunto Cristal-Colores -->
-  <div class="product-card">
-    <div style="display: flex; gap: 8px; justify-content: center; align-items: center; height: 180px; background: #f9f9f9; border-bottom: 1px solid #eee;">
-      <img src="images/collares/collaresfondo/acerocristalitos.png" alt="Collar Picos" style="width: 40%; object-fit: contain;">
-      <img src="images/pendientes/pendientes fondo/acerocristales.png" alt="Pendiente Picos" style="width: 40%; object-fit: contain;">
-    </div>
-    <div class="product-info">
-      <h3>Conjunto Cristal-Colores</h3>
-      <p class="price">34€</p>
-    </div>
-  </div>
 
-</div>
 
-<!-- 🌟 Conjunto de 4 piezas (2 filas de 2) -->
-<div class="products-grid" style="grid-template-columns: repeat(2, 1fr); gap: 30px; margin-bottom: 40px;">
 
-  <!-- Conjunto Picos (Collar + Pendientes) -->
-  <div class="product-card">
-    <div style="display: flex; gap: 8px; justify-content: center; align-items: center; height: 180px; background: #f9f9f9; border-bottom: 1px solid #eee;">
-      <img src="images/collares/collaresfondo/picoscollar.png" alt="Collar Picos" style="width: 40%; object-fit: contain;">
-      <img src="images/pendientes/pendientes fondo/pico.png" alt="Pendiente Picos" style="width: 40%; object-fit: contain;">
-    </div>
-    <div class="product-info">
-      <h3>Conjunto Picos</h3>
-      <p class="price">39€</p>
-    </div>
-  </div>
-
-  <!-- Conjunto Picos (Pulsera + Anillo) -->
-  <div class="product-card">
-    <div style="display: flex; gap: 8px; justify-content: center; align-items: center; height: 180px; background: #f9f9f9; border-bottom: 1px solid #eee;">
-      <img src="images/pulseras/pulserasfondo/pulserapicos.png" alt="Pulsera Picos" style="width: 40%; object-fit: contain;">
-      <img src="images/anillos/anillosfondo/PICOS.png" alt="Anillo Picos" style="width: 40%; object-fit: contain;">
-    </div>
-    <div class="product-info">
-      <h3>Conjunto Picos</h3>
-      <p class="price">30€</p>
-    </div>
-  </div>
-
-</div>
-
-      <a href="#" class="back-btn" data-back>← Volver a categorías</a>
+    <!-- Contacto - Versión Mosaico -->
+    <div class="contact" style="background: none; box-shadow: none; padding: 0;">
+      <div
+        style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; border-radius: 20px; overflow: hidden; box-shadow: var(--shadow-lg);">
+        <img src="images/inspo/libris.jpeg" alt="Inspiración 1" style="width: 100%; height: 350px; object-fit: cover;">
+        <img src="images/inspo/storyCaafe.jpeg" alt="Inspiración 2"
+          style="width: 100%; height: 350px; object-fit: cover;">
+        <img src="images/inspo/puertaOG.jpeg" alt="Inspiración 3"
+          style="width: 100%; height: 350px; object-fit: cover;">
+      </div>
+      <div style="margin-top: 25px; text-align: center;">
+        <a href="https://www.instagram.com/legland.jw" target="_blank" rel="noopener noreferrer"
+          style="display: inline-block; font-size: 1rem; color: #777; font-style: italic; text-decoration: none; padding: 10px 20px; border-radius: 8px; transition: all 0.3s ease; background: transparent; border: 1px solid transparent;">
+          @legland.jw
+        </a>
+      </div>
     </div>
 
+    <!-- WhatsApp Float Button -->
+    <a href="https://wa.me/34699384709" class="whatsapp-float" target="_blank" rel="noopener noreferrer"
+      aria-label="Contactar por WhatsApp">
+      💬
+    </a>
 
-    <!-- Contacto -->
-    <div class="contact">
-      <h2>¿Te gustó algo?</h2>
-      <p>¡Escríbenos por Instagram o Correo!</p>
-      <a href="https://www.instagram.com/legland.jw" target="_blank">Instagram @legland.jw</a>
-      <a href="mailto:www.legland@gmail.com">www.legland@gmail.com</a>
-    </div>
+    <footer>
+      <p>© 2026 LeGland · Joyas de acero inoxidable</p>
+    </footer>
 
-  </div>
+    <script>
+      // Slider del header - CAMBIADO A 3 SEGUNDOS
+      let currentSlide = 0;
+      const slides = document.querySelectorAll('.header-slide');
 
-  <footer>
-    © 2025 LeGland · Joyas acero inoxidable
-  </footer>
-
-  <script>
-    // Mostrar sección específica
-    function showSection(sectionId) {
-      // Ocultar todas
-      document.querySelectorAll('.products-section').forEach(s => s.classList.remove('active'));
-      document.getElementById('section-categorias').style.display = 'none';
-
-      // Mostrar la elegida
-      document.getElementById(`section-${sectionId}`).classList.add('active');
-    }
-
-    // Volver a categorías
-    function showCategories() {
-      document.querySelectorAll('.products-section').forEach(s => s.classList.remove('active'));
-      document.getElementById('section-categorias').style.display = 'block';
-    }
-
-    // Eventos
-    document.querySelectorAll('.nav-link, .category-card').forEach(el => {
-      el.addEventListener('click', function (e) {
-        e.preventDefault();
-        const section = this.getAttribute('data-section');
-        if (section) showSection(section);
-      });
-    });
-
-    document.addEventListener('click', function (e) {
-      if (e.target.hasAttribute('data-back')) {
-        e.preventDefault();
-        showCategories();
+      function nextSlide() {
+        slides[currentSlide].classList.remove('active');
+        currentSlide = (currentSlide + 1) % slides.length;
+        slides[currentSlide].classList.add('active');
       }
-    });
 
-  </script>
+      // Cambiar imagen cada 3 segundos
+      setInterval(nextSlide, 3000);
 
+      // Navegación entre secciones
+      function showSection(sectionId) {
+        document.querySelectorAll('.products-section, .section-content').forEach(s => {
+          s.classList.remove('active');
+          s.style.display = 'none';
+        });
+
+        const targetSection = document.getElementById(`section-${sectionId}`);
+        if (targetSection) {
+          targetSection.classList.add('active');
+          targetSection.style.display = 'block';
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
+        }
+
+        document.querySelectorAll('.nav-link').forEach(link => {
+          link.classList.remove('active');
+          if (link.getAttribute('data-section') === sectionId) {
+            link.classList.add('active');
+          }
+        });
+
+        document.getElementById('navContainer').classList.remove('active');
+      }
+
+      function showCategories() {
+        showSection('categorias');
+      }
+
+      document.querySelectorAll('.nav-link, .category-card').forEach(el => {
+        el.addEventListener('click', function (e) {
+          e.preventDefault();
+          const section = this.getAttribute('data-section');
+          if (section) {
+            showSection(section);
+          }
+        });
+      });
+
+      function toggleMobileMenu() {
+        document.getElementById('navContainer').classList.toggle('active');
+      }
+
+      // Cambiar color de producto
+      function cambiarColor(producto, btn, imagen) {
+        const productCard = btn.closest('.product-card');
+        productCard.querySelectorAll('.color-option').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const imgElement = document.getElementById(`${producto}-img`);
+        if (imgElement && imagen) {
+          imgElement.style.opacity = '0';
+          setTimeout(() => {
+            imgElement.src = imagen;
+            imgElement.style.opacity = '1';
+          }, 300);
+        }
+      }
+
+      // Consultar producto
+      function consultarProducto(nombre, precio) {
+        const mensaje = `¡Hola! Me interesa el producto: ${nombre} (${precio}€). ¿Me podéis dar más información?`;
+        const whatsappUrl = `https://wa.me/34699384709?text=${encodeURIComponent(mensaje)}`;
+
+        if (confirm('¿Quieres contactar por WhatsApp?')) {
+          window.open(whatsappUrl, '_blank');
+        }
+        // Si cancela, no hace nada
+      }
+      // Animación al scroll
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+          }
+        });
+      }, observerOptions);
+
+      document.querySelectorAll('.product-card, .category-card').forEach(card => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(20px)';
+        card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(card);
+      });
+    </script>
 </body>
 
 </html>
